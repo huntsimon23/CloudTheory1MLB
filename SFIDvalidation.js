@@ -1,50 +1,52 @@
-var id15 = process.argv[2];
-var id18;
+var id = process.argv[2];
 
 const sfdc15to18 = (id15) => {
-    let reverseString = (str) => {
+    const reverseString = (str) => {
         return (str === '') ? '' : reverseString(str.substr(1)) + str.charAt(0);
       };
     
     const suffixChars = "ABCDEFGHIJKLMNOPQRSTUWXYZ012345";
 
-    var block1 = id15.slice(0, 5);
-    // let block2 = x.slice(5, 10);
-    // let block3 = x.slice(10, 15);
+    const blockConvert = (block) => {
+        var blockA = reverseString(block)
+        var blockB = blockA.replace(/[a-z0-9]/g, "0");
+        var blockC = blockB.replace(/[A-Z]/g, "1")
+        var blockD = parseInt(blockC, 2)
+        var blockE = suffixChars.charAt(blockD);
+        return blockE
+    }
 
+    if (id15.length === 15) {
+        var block1 = id15.slice(0, 5);
+        var block2 = id15.slice(5, 10);
+        var block3 = id15.slice(10, 15);
+        
+        let x = blockConvert(block1)
+        let y = blockConvert(block2)
+        let z = blockConvert(block3)
 
-    var block1a = reverseString(block1)
-    var block1b = block1a.replace(/[a-z0-9]/g, "0");
-    var block1c = block1b.replace(/[A-Z]/g, "1")
-    var block1d = parseInt(block1c, 2)
-    var block1e = suffixChars.charAt(block1d);
+        console.log(x, y, z);
 
-    console.log(block1, block1a, block1b, block1c, block1d, block1e);
+        let id18 = id15 + x + y + z;
+        return console.log("Input id15: " + id15 + "n\ Output id18: " + id18);
+
+    } else {
+        return error("This is not a valid Salesforce 15 character ID")      
+    }
 }
 
-sfdc15to18(id15);
+const sfdc18to15 = (id18) => {
+    if (id18.length === 18) {
+        var id15 = id18.substr(0, 15)
+        return console.log(id15)
+    } else {
+        return error("This is not a valid Salesforce 18 character ID") 
+    }
+};
 
-
-// (function(){
-//     var input=process.argv[2];
-//     var output;
-//         if(input.length == 15){
-//             var addon="";
-//             for(var block=0;block<3; block++)
-//             {
-//                 var loop=0;
-//                 for(var position=0;position<5;position++){
-//                     var current=input.charAt(block*5+position);
-//                     if(current>="A" && current<="Z")
-//                         loop+=1<<position;
-//                 }
-//                 addon+="ABCDEFGHIJKLMNOPQRSTUVWXYZ012345".charAt(loop);
-//             }
-//             output=(input+addon);
-//         }
-//         else{
-//             console.log("Error : "+input+" isn't 15 characters ("+input.length+")");
-//             return;
-//         }
-//     console.log('18-character ID:',output);
-//     })();
+const sfdcIsValidId = (id) => {
+    return (id.length === 15 || id.length === 18) ? console.log(true):console.log(false);
+}
+// sfdc15to18(id15);
+// sfdc18to15(id18);
+sfdcIsValidId(id);
