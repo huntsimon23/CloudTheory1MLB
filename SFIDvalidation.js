@@ -1,4 +1,4 @@
-var id = process.argv[2];
+var id15 = process.argv[2];
 
 const sfdc15to18 = (id15) => {
     const reverseString = (str) => {
@@ -29,9 +29,8 @@ const sfdc15to18 = (id15) => {
 
         let id18 = id15 + x + y + z;
         return console.log("Input id15: " + id15 + "n\ Output id18: " + id18);
-
     } else {
-        return error("This is not a valid Salesforce 15 character ID")      
+        return console.log("Error: not a valid Salesforce(15) Id")      
     }
 }
 
@@ -47,6 +46,6 @@ const sfdc18to15 = (id18) => {
 const sfdcIsValidId = (id) => {
     return (id.length === 15 || id.length === 18) ? console.log(true):console.log(false);
 }
-// sfdc15to18(id15);
+sfdc15to18(id15);
 // sfdc18to15(id18);
-sfdcIsValidId(id);
+// sfdcIsValidId(id);
