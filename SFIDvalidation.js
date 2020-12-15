@@ -39,7 +39,7 @@ const sfdc18to15 = (id18) => {
         var id15 = id18.substr(0, 15)
         return console.log(id15)
     } else {
-        return error("This is not a valid Salesforce 18 character ID") 
+        return console.log("This is not a valid Salesforce 18 character ID") 
     }
 };
 
